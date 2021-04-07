@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>ndup</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" />
+    <link rel='stylesheet' type='text/css' media='screen' href='ndup.css'>
+</head>
+<body>
+    <header>
+        <img src="ndup-logo.png" alt="ndup logo">    
+    </header>
+
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <button class="btn btn-primary" >The Whale Effect</button><br><br>
+        <p>Connexion entre 2 APIs pour voir les effets de beaucoup de WhaleTransactions sur le prix du BTC</p>
+        
+        </div>
+        </div>
+        </div>
+    </section>
+    
+    <section>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <div class="well formbl" style="margin-top: 10%;">
+                    <p>Formulaire de contact</p>
+                    <form role="form" id="contactForm" data-toggle="validator" class="shake">
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="name" >Nom</label>
+                                <input type="text" class="form-control" id="name" placeholder="Votre nom" required data-error="NEW ERROR MESSAGE">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="email" >Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Votre email" required>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" >Message</label>
+                            <textarea id="message" class="form-control" rows="5" placeholder="Votre message" required></textarea>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <button type="submit" id="form-submit" class="btn btn-info">Envoyer</button>
+                        <div id="msgSubmit" class="h3 text-center hidden"></div>
+                        <div class="clearfix"></div>
+                    </form>
+                    </div>
+                </div>
+                </div>
+    </section>
+
+    <footer>
+
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.5.2/validator.min.js" integrity="sha512-vZEoK8xRncku4g5GANHh5zobUjeCMbZkSEahrADeAcRlk/1Ignf8sAKojkV4RZLkPw145+ILJFisI2pnjsPtGQ==" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src='form.js'></script>
+</body>
+</html>
