@@ -24,7 +24,7 @@ if (empty($_POST["message"])) {
 }
 
 
-$EmailTo = "nicomail08@yahoo.fr";
+$EmailTo = "testform2021@yopmail.com";
 $Subject = "FORM CONTACT - New Message Received";
 
 // prepare email body text
