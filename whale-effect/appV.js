@@ -9,7 +9,7 @@ let blockchainName = [];
 
 //call to CoinGecko API for BTC price
 async function priceId() {
-    const resid = await fetch("https://cors-anywhere.herokuapp.com/https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin");
+    const resid = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin");
     const aff = await resid.json();
     return aff;
 }
@@ -22,6 +22,7 @@ priceId().then(aff => {
     }
 
     baleineRequest().then(bal => {
+        console.log(bal.transactions);
         for (let i in bal.transactions) {
             if(bal.transactions[i]['symbol'] == 'btc'){
                 let latr = document.createElement('tr');
