@@ -5,6 +5,10 @@ body{
 	font-size: 12px;
 	text-align: center;
 }
+h1{
+	font-size: 14px;
+	font-weight: bold;
+}
 .formbl{
 	background-color: #231f20;
 	color: white;

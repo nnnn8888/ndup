@@ -1,9 +1,6 @@
 <?php 
 
-$data = $_POST;
-$errorMSG = "";
-
-    // NAME
+// NAME
     if (empty($_POST["name"])) {
         $errorMSG = "Merci de renseigner votre nom";
     } else {
@@ -26,7 +23,7 @@ $errorMSG = "";
 
 
     $EmailTo = "ndup.freelance@outlook.fr";
-    $Subject = "FORM CONTACT - New Message Received";
+    $Subject = "GIT FORM CONTACT - New Message Received";
 
     // prepare email body text
     $Body = "";
