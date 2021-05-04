@@ -3,75 +3,62 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>ndup</title>
+    <title>API Coms</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-
+    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    
-   
-    <link rel='stylesheet' type='text/css' media='screen' href='ndup.css'>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+  
 </head>
 <body>
-    <header>
-        <img src="ndup-logo.png" alt="ndup logo">    
-    </header>
-
-
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-
-                    <button class="btn btn-primary" onclick="window.location.href='/whale-effect/index.html';">The Whale Effect</button><br><br>
-        <p>Connexion entre 2 APIs. Donne les transactions Bitcoin parmi les 100 denières supérieur à 500 000$  </p>
-        <p>-----------------</p>
-        <p>Autres projets à venir...</p>
+    <div class="container">
+        <h1 class="col-md-12">the whale effect</h1> 
+    <div class="row col-md-12 resume ">
+       
+        <p >Connexion on WhaleAlert API and Coingecko API.</p>
+        <p > It shows the last 100 whale BTC transactions (amount above 500 000 $) with the transaction amount in $, the representation of this transaction versus current cirulating supply of BTC, and the % of price variation since the transaction.</p>
+        <p >The initial goal was to see the whale-transactions effect on BTC price on several days but API whaleAlert only give the last 100 transactions. I'll find a way with session storage or other solution in the future.</p>
         
-        </div>
-        </div>
-        </div>
-    </section>
+    </div>
+    <div class="row col-md-12">
+        <table class="table table-striped" id="whaletotal">
+            <tr class="">
+                <td>Nb BTC Tx</td>
+                <td>Total amount BTC</td>
+                <td>Total amount $</td>
+               
+                
+            </tr>
+
+        </table>
     
-    <section>
+    </div>
+
+
+    <br>    
+    <div class="row col-md-12"> 
+        <table class="table table-striped" id="whaletable">
+            <tr class="titre">
+           
+            <td>TX link</td>
+            <td>TX amount</td>
+            <td>BTC TX Price</td>
+            <td>TX % of circulating Supply</td>
+            <td>Delta VS current price</td>
+
         
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
-                    <div class="well formbl" style="margin-top: 10%;">
-                    <p>Formulaire de contact</p>
+            </tr>
 
-                    <form role="form" id="contact" class="shake">
-                        <div class="row">
-                            <div class="form-group col-sm-6">
-                                <label for="name" >Nom</label>
-                                <input type="text" class="form-control" id="name" placeholder="Votre nom" required data-error="le nom est requis">
-                                <div class="help-block with-errors"></div>
-                            </div>
-                            <div class="form-group col-sm-6">
-                                <label for="email" >Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Votre email" required>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="message" >Message</label>
-                            <textarea id="message" class="form-control" rows="5" placeholder="Votre message" required></textarea>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                        <button type="submit" id="submit" class="btn btn-info">Envoyer</button>
-                        <div id="msgSubmit" class="h3 text-center hidden"></div>
-                        <div class="clearfix"></div>
-                    </form>
-                    
-                    </div>
-                </div>
-                </div>
-    </section>
+        </table>
+    </div>
+    <div>
+        <canvas id="myChart" width="400" ></canvas>
+      </div>
 
-    <footer>
-
-        </footer>
-
-    <script src='form.js'></script>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src='appV.js'></script>
 </body>
 </html>
