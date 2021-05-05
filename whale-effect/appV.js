@@ -7,6 +7,17 @@ let sommeAmount = [];
 let sommeAmountDollar = [];
 let blockchainName = [];
 
+//popin
+function pop(div) {
+    document.getElementById(div).style.display='block';
+    return false;
+  }
+  function hide(div) {
+    document.getElementById(div).style.display='none';
+    return false;
+  }
+  
+
 //call to CoinGecko API for BTC price
 async function priceId() {
     const resid = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin");

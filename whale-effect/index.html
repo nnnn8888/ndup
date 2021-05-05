@@ -3,7 +3,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>API Coms</title>
+    <title>The Whale Effect</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -13,19 +13,28 @@
   
 </head>
 <body>
+    <div id="pop1" class="parentDisable">
+        <div class="popin">
+                <p>There is CORS issue with whale-alert API. <br>
+                Because it was just for test, I've put a temporary solution by calling cors-anywhere external proxy so  you might have to refresh the page several times in order to connect with the API and receive datas (cors-anywhere didn't work every time, if you don't see datas after 10 secs, reload the page)</p> 
+                <p><button onClick="window.location.reload();">Refresh Page</button></p>
+
+                <a href="#" onClick="return hide('pop1')">Close</a>
+        </div>
+    </div>
     <div class="container">
         <h1 class="col-md-12">the whale effect</h1> 
     <div class="row col-md-12 resume ">
        
         <p >Connexion on WhaleAlert API and Coingecko API.</p>
-        <p > It shows the last 100 whale BTC transactions (amount above 500 000 $) with the transaction amount in $, the representation of this transaction versus current cirulating supply of BTC, and the % of price variation since the transaction.</p>
-        <p >The initial goal was to see the whale-transactions effect on BTC price on several days but API whaleAlert only give the last 100 transactions. I'll find a way with session storage or other solution in the future.</p>
+        <p > It shows the last 100 whale Bitcoin transactions (amount above 500 000 $) with the transaction amount in $, the representation of this transaction versus current cirulating supply of BTC, and the % of price variation since the transaction.</p>
+        <p >The initial goal was to see the whale-transactions effect on BTC price on several days but API whaleAlert only give the last 100 transactions. I'll find a way with session storage for V2.</p>
         
     </div>
     <div class="row col-md-12">
         <table class="table table-striped" id="whaletotal">
             <tr class="">
-                <td>Nb BTC Tx</td>
+                <td>Nb BTC TX</td>
                 <td>Total amount BTC</td>
                 <td>Total amount $</td>
                
