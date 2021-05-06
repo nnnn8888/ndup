@@ -27,7 +27,7 @@ async function priceId() {
 priceId().then(aff => {
 //call to whale-alert for 100 last whale transaxions (amuont > 500K$)
     async function baleineRequest() {
-        const response = await fetch("https://cors-anywhere.herokuapp.com/https://api.whale-alert.io/v1/transactions?api_key=vpICDYabrMM5LCbKMnCrbyGmTRBZo2F5&min_value=500000");
+        const response = await fetch("https://cors.bridged.cc/https://api.whale-alert.io/v1/transactions?api_key=vpICDYabrMM5LCbKMnCrbyGmTRBZo2F5&min_value=500000");
         const bal = await response.json();
         return bal;
     }
