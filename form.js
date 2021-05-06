@@ -9,7 +9,7 @@ form.addEventListener('submit', function(event){
 
 async function postData(formattedFormData){
 
-  const response = await fetch('/ndup/contact.php',{
+  const response = await fetch('https://github.com/nnnn8888/ndup/blob/3cd1454268c866adbd41740a36ca2f318923b524/contact.php',{
       method: 'POST',
       body: formattedFormData
   });
