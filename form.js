@@ -10,6 +10,11 @@ form.addEventListener('submit', function(event){
 async function postData(formattedFormData){
 
   const response = await fetch('ndup/contact.php',{
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        },
+      mode: 'same-origin',
       method: 'POST',
       body: formattedFormData
   });
