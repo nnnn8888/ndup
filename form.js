@@ -9,7 +9,7 @@ form.addEventListener('submit', function(event){
 
 async function postData(formattedFormData){
 
-  const response = await fetch('contact.php',{
+  const response = await fetch('https://cors.bridged.cc/https://nnnn8888.github.io/ndup/contact.php',{
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
