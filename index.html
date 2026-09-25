@@ -1,55 +1,205 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>ndup</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Démo — Navigation web via manette (Gamepad API)</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --card: #1a1d24;
+    --card-focus: #2a2f3a;
+    --accent: #5b8def;
+    --text: #e6e8eb;
+    --muted: #8a8f98;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 24px 16px 80px;
+  }
+  header {
+    max-width: 720px;
+    margin: 0 auto 24px;
+  }
+  h1 { font-size: 1.4rem; margin-bottom: 4px; }
+  p.sub { color: var(--muted); font-size: 0.9rem; margin: 0; }
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Domine&display=swap" rel="stylesheet">
-    
-   
-    <link rel='stylesheet' type='text/css' media='screen' href='ndup.css'>
+  #status {
+    max-width: 720px;
+    margin: 0 auto 20px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: var(--card);
+    font-size: 0.85rem;
+    color: var(--muted);
+    border: 1px solid #2a2d35;
+  }
+  #status.connected { color: #7ee787; border-color: #2d4a34; }
+
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .item {
+    background: var(--card);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  }
+  .item .name { font-weight: 600; }
+  .item .desc { color: var(--muted); font-size: 0.82rem; margin-top: 2px; }
+  .item .price { color: var(--accent); font-weight: 600; white-space: nowrap; margin-left: 16px; }
+
+  .item.focused {
+    background: var(--card-focus);
+    border-color: var(--accent);
+    transform: translateX(4px);
+  }
+  .item.selected {
+    border-color: #7ee787;
+  }
+
+  footer {
+    max-width: 720px;
+    margin: 24px auto 0;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+
+  kbd {
+    background: #2a2d35;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.78rem;
+  }
+</style>
 </head>
 <body>
-    <header>
-        <img src="ndup-logo.png" alt="ndup logo">    
-    </header>
 
-      
+<header>
+  <h1>Navigation manette — démo Gamepad API</h1>
+  <p class="sub">Alternative de navigation clavier/souris pour une liste de produits (POC accessibilité)</p>
+</header>
 
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h1>QUELQUES TRAVAUX PERSO</h1>
-                    <p>-</p>
-                    <p>The Wale effect: API et JS</p>
-                    <p>Connexion entre 2 APIs. Donne les transactions Bitcoin parmi les 100 denières supérieur à 500 000$  </p>
-                    <button class="btn btn-primary" onclick="window.location.href='/ndup/whale-effect/index.html';">The Whale Effect</button><br><br>
-                   <!-- <p>-</p>
-                    <p>Simple Contact Form JS/PHP</p>
-                    <p>Simple Formulaire de contact en HMLT/JS/PHP. Aucun email n'est relié actuellement et Github Pages ne permet pas cette utilisation de POST data, il faut copier les fichiers si vous le voulez.</p>
-                    <button class="btn btn-primary" onclick="window.location.href='/ndup/contact-form/index.html';">Contact Form</button><br><br>-->
-                    <p>-</p>
-                    <p>Autres projets à venir...</p> 
-                    
-                   
-                     
-                </div>
-            </div>
-        </div>
-    </section>
+<div id="status">Aucune manette détectée. Branche/connecte une manette et appuie sur un bouton pour l'activer.</div>
 
-     
+<main id="list"></main>
 
+<footer>
+  <p>
+    <kbd>↑ / ↓ D-pad ou stick gauche</kbd> pour naviguer ·
+    <kbd>A / Croix</kbd> pour sélectionner ·
+    <kbd>B / Rond</kbd> pour désélectionner
+  </p>
+  <p>
+    Démo construite avec l'API Gamepad standard du navigateur (aucune dépendance externe).
+    Illustre une navigation alternative pour des interfaces web (accessibilité motrice, usage sans clavier/souris).
+  </p>
+</footer>
 
-    <footer>
+<script>
+const items = [
+  { name: "Audit accessibilité", desc: "Revue WCAG + navigation alternative", price: "à partir de 800€" },
+  { name: "Intégration Gamepad API", desc: "Navigation manette sur interface existante", price: "sur devis" },
+  { name: "POC cloud gaming", desc: "Test compatibilité manette / latence", price: "sur devis" },
+  { name: "Refonte UX accessible", desc: "Parcours clavier + manette + lecteur d'écran", price: "à partir de 1500€" },
+  { name: "Formation équipe", desc: "Bonnes pratiques accessibilité web", price: "sur devis" },
+];
 
-        </footer>
+const listEl = document.getElementById("list");
+const statusEl = document.getElementById("status");
 
-    
+let focusIndex = 0;
+let selectedIndex = -1;
+let gamepadIndex = null;
+let prevButtons = [];
+
+function render() {
+  listEl.innerHTML = "";
+  items.forEach((item, i) => {
+    const el = document.createElement("div");
+    el.className = "item";
+    if (i === focusIndex) el.classList.add("focused");
+    if (i === selectedIndex) el.classList.add("selected");
+    el.innerHTML = `
+      <div>
+        <div class="name">${item.name}</div>
+        <div class="desc">${item.desc}</div>
+      </div>
+      <div class="price">${item.price}</div>
+    `;
+    listEl.appendChild(el);
+  });
+}
+
+function pollGamepad() {
+  const pads = navigator.getGamepads ? navigator.getGamepads() : [];
+  const pad = gamepadIndex !== null ? pads[gamepadIndex] : null;
+
+  if (pad) {
+    statusEl.textContent = `Manette connectée : ${pad.id}`;
+    statusEl.classList.add("connected");
+
+    const btn = (i) => pad.buttons[i] && pad.buttons[i].pressed;
+    const wasPressed = (i) => prevButtons[i];
+
+    // D-pad haut/bas (12 = haut, 13 = bas) + stick gauche vertical (axe 1)
+    const dpadUp = btn(12) || pad.axes[1] < -0.5;
+    const dpadDown = btn(13) || pad.axes[1] > 0.5;
+
+    if (dpadUp && !wasPressed(12)) {
+      focusIndex = (focusIndex - 1 + items.length) % items.length;
+      render();
+    }
+    if (dpadDown && !wasPressed(13)) {
+      focusIndex = (focusIndex + 1) % items.length;
+      render();
+    }
+    // Bouton A (0) = sélectionner
+    if (btn(0) && !wasPressed(0)) {
+      selectedIndex = focusIndex;
+      render();
+    }
+    // Bouton B (1) = désélectionner
+    if (btn(1) && !wasPressed(1)) {
+      selectedIndex = -1;
+      render();
+    }
+
+    prevButtons = pad.buttons.map(b => b.pressed);
+  }
+
+  requestAnimationFrame(pollGamepad);
+}
+
+window.addEventListener("gamepadconnected", (e) => {
+  gamepadIndex = e.gamepad.index;
+  statusEl.textContent = `Manette connectée : ${e.gamepad.id}`;
+  statusEl.classList.add("connected");
+});
+
+window.addEventListener("gamepaddisconnected", () => {
+  gamepadIndex = null;
+  statusEl.textContent = "Manette déconnectée.";
+  statusEl.classList.remove("connected");
+});
+
+render();
+requestAnimationFrame(pollGamepad);
+</script>
+
 </body>
 </html>
